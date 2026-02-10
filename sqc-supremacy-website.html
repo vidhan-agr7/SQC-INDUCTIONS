@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQC Supremacy | Super Quant Club NIT Jalandhar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --bg-light: #ffffff;
+            --bg-lighter: #f8fafc;
+            --text-dark: #1e293b;
+            --text-medium: #475569;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--bg-lighter);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor-trail {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--secondary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: trailFade 0.6s ease-out forwards;
+            box-shadow: 0 0 10px var(--secondary);
+        }
+
+        @keyframes trailFade {
+            to {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            animation: float 20s infinite;
+            opacity: 0.2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(100px, -100px); }
+            50% { transform: translate(-50px, -200px); }
+            75% { transform: translate(150px, -50px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 2px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-family: 'Audiowide', cursive;
+            font-size: 1.8em;
+            font-weight: bold;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: logoGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .register-btn {
+            background: var(--gradient-1);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Audiowide', cursive;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .register-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Hero Section */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 150px 50px 100px;
+            background: linear-gradient(135deg, #f0f9ff 0%, #fef3c7 100%);
+        }
+
+        .matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: matrixScroll 30s linear infinite;
+        }
+
+        @keyframes matrixScroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .glitch-text {
+            font-family: 'Audiowide', cursive;
+            font-size: 6em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            position: relative;
+            animation: glitchAnimation 5s infinite;
+        }
+
+        @keyframes glitchAnimation {
+            0% { 
+                text-shadow: 
+                    3px 0 var(--secondary),
+                    -3px 0 var(--primary);
+            }
+            14% { 
+                text-shadow: 
+                    3px 0 var(--secondary),
+                    -3px 0 var(--primary);
+            }
+            15% {
+                text-shadow: 
+                    -3px 0 var(--secondary),
+                    3px 0 var(--primary);
+            }
+            49% {
+                text-shadow: 
+                    -3px 0 var(--secondary),
+                    3px 0 var(--primary);
+            }
+            50% {
+                text-shadow: 
+                    3px 0 var(--secondary),
+                    -3px 0 var(--primary);
+            }
+            99% {
+                text-shadow: 
+                    3px 0 var(--secondary),
+                    -3px 0 var(--primary);
+            }
+            100% {
+                text-shadow: none;
+            }
+        }
+
+        .supremacy-badge {
+            display: inline-block;
+            background: var(--gradient-1);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-family: 'Audiowide', cursive;
+            font-size: 1.5em;
+            margin: 20px 0;
+            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-description {
+            font-size: 1.3em;
+            color: var(--text-medium);
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+
+        .gateway-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 60px auto 0;
+        }
+
+        .gateway-card {
+            background: white;
+            border: 2px solid var(--border-color);
+            padding: 40px 30px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .gateway-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gateway-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .gateway-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: var(--primary);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.2);
+        }
+
+        .gateway-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .gateway-card:hover .gateway-icon {
+            transform: rotateY(360deg) scale(1.2);
+        }
+
+        .gateway-title {
+            font-family: 'Audiowide', cursive;
+            font-size: 1.4em;
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .gateway-desc {
+            font-size: 1em;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        /* Registration Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border: 3px solid var(--primary);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2em;
+            cursor: pointer;
+            color: var(--text-medium);
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+            color: var(--primary);
+        }
+
+        .modal-title {
+            font-family: 'Audiowide', cursive;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-family: 'Audiowide', cursive;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            background: var(--bg-lighter);
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-dark);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--gradient-1);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Audiowide', cursive;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 35px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 120px 50px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-family: 'Audiowide', cursive;
+            font-size: 4em;
+            text-align: center;
+            margin-bottom: 80px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        /* Interactive Gallery */
+        #gallery {
+            background: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            height: 300px;
+            background: var(--gradient-3);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.3), transparent);
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 20px 50px rgba(37, 99, 235, 0.25);
+            z-index: 10;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .view-text {
+            font-family: 'Audiowide', cursive;
+            font-size: 2em;
+            color: var(--primary);
+        }
+
+        /* Achievements with Animations */
+        #achievements {
+            background: var(--bg-lighter);
+        }
+
+        .achievement-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .achievement-card {
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(37, 99, 235, 0.1), transparent 30%);
+            animation: rotate 4s linear infinite;
+            opacity: 0;
+        }
+
+        .achievement-card:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .achievement-card::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: white;
+            border-radius: 18px;
+            z-index: 1;
+        }
+
+        .achievement-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .achievement-year {
+            font-family: 'Audiowide', cursive;
+            font-size: 2em;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .achievement-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .achievement-desc {
+            color: var(--text-medium);
+            line-height: 1.8;
+        }
+
+        /* Fun Easter Egg Section */
+        .easter-egg {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            cursor: pointer;
+            z-index: 999;
+            animation: bounce 2s ease-in-out infinite;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .easter-egg:hover {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .glitch-text { font-size: 3em; }
+            .section-title { font-size: 2.5em; }
+            nav { padding: 15px 20px; }
+            section { padding: 100px 20px; }
+            .nav-links { display: none; }
+            .gateway-cards { grid-template-columns: 1fr; }
+            .modal-content { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Easter Egg -->
+    <div class="easter-egg" title="Click me for SQC supremacy!">🚀</div>
+
+    <!-- Floating Particles -->
+    <script>
+        for(let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            document.body.appendChild(particle);
+        }
+    </script>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">SQC SUPREMACY</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#inventions">Inventions</a></li>
+            <li><a href="#profile">Quanta</a></li>
+            <li><a href="#faqs">FAQs</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="register-btn" onclick="openModal()">Join SQC</button>
+    </nav>
+
+    <!-- Registration Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 class="modal-title">JOIN THE SUPREMACY</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required placeholder="Enter your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">College Email ID</label>
+                    <input type="email" id="email" required placeholder="yourname@nitj.ac.in" pattern=".*@nitj\.ac\.in$">
+                    <small style="color: var(--text-light);">Must be a valid NIT Jalandhar email</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="rollno">Roll Number</label>
+                    <input type="text" id="rollno" required placeholder="Enter your roll number">
+                </div>
+                
+                <div class="form-group">
+                    <label for="branch">Branch</label>
+                    <select id="branch" required>
+                        <option value="">Select your branch</option>
+                        <option value="IT">Information Technology</option>
+                        <option value="CSE">Computer Science</option>
+                        <option value="ECE">Electronics & Communication</option>
+                        <option value="EE">Electrical Engineering</option>
+                        <option value="ME">Mechanical Engineering</option>
+                        <option value="CE">Civil Engineering</option>
+                        <option value="CHE">Chemical Engineering</option>
+                        <option value="IPE">Industrial & Production</option>
+                        <option value="ICE">Instrumentation & Control</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="year">Year</label>
+                    <select id="year" required>
+                        <option value="">Select your year</option>
+                        <option value="1">1st Year</option>
+                        <option value="2">2nd Year</option>
+                        <option value="3">3rd Year</option>
+                        <option value="4">4th Year</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="interest">Why Super Quant Club?</label>
+                    <input type="text" id="interest" required placeholder="Your interest in quantitative analysis">
+                </div>
+                
+                <button type="submit" class="submit-btn">Achieve Supremacy</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="matrix-bg"></div>
+        <div class="hero-content">
+            <h1 class="glitch-text">SUPER QUANT CLUB</h1>
+            <div class="supremacy-badge">⚡ SQC SUPREMACY ⚡</div>
+            <p class="hero-description">NIT Jalandhar | Where Numbers Meet Innovation</p>
+            
+            <div class="gateway-cards">
+                <div class="gateway-card" onclick="scrollToSection('gallery')">
+                    <span class="gateway-icon">📸</span>
+                    <h3 class="gateway-title">Epic Gallery</h3>
+                    <p class="gateway-desc">Witness our legendary moments</p>
+                </div>
+                
+                <div class="gateway-card" onclick="scrollToSection('achievements')">
+                    <span class="gateway-icon">🏆</span>
+                    <h3 class="gateway-title">Hall of Fame</h3>
+                    <p class="gateway-desc">Dominating competitions since day one</p>
+                </div>
+                
+                <div class="gateway-card" onclick="scrollToSection('inventions')">
+                    <span class="gateway-icon">🔥</span>
+                    <h3 class="gateway-title">Game Changers</h3>
+                    <p class="gateway-desc">Innovations that break the matrix</p>
+                </div>
+                
+                <div class="gateway-card" onclick="scrollToSection('profile')">
+                    <span class="gateway-icon">⚡</span>
+                    <h3 class="gateway-title">Meet Quanta</h3>
+                    <p class="gateway-desc">Our AI-powered guardian spirit</p>
+                </div>
+                
+                <div class="gateway-card" onclick="scrollToSection('faqs')">
+                    <span class="gateway-icon">💡</span>
+                    <h3 class="gateway-title">Knowledge Base</h3>
+                    <p class="gateway-desc">All your questions, answered</p>
+                </div>
+                
+                <div class="gateway-card" onclick="scrollToSection('contact')">
+                    <span class="gateway-icon">🚀</span>
+                    <h3 class="gateway-title">Connect</h3>
+                    <p class="gateway-desc">Join the supremacy movement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery">
+        <h2 class="section-title">Epic Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <span class="view-text">HACKATHON 2024</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <span class="view-text">WORKSHOP</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <span class="view-text">VICTORY</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <span class="view-text">TEAM SQC</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <span class="view-text">CODING NIGHT</span>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-overlay">
+                    <span class="view-text">INNOVATION</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements">
+        <h2 class="section-title">Hall of Fame</h2>
+        <div class="achievement-cards">
+            <div class="achievement-card">
+                <div class="achievement-content">
+                    <div class="achievement-year">2024 🔥</div>
+                    <h3 class="achievement-title">National Quant Championship - DOMINATED</h3>
+                    <p class="achievement-desc">Crushed 50+ teams from IITs, NITs, and top colleges. First place with a perfect score. SQC Supremacy achieved!</p>
+                </div>
+            </div>
+            
+            <div class="achievement-card">
+                <div class="achievement-content">
+                    <div class="achievement-year">2024 ⚡</div>
+                    <h3 class="achievement-title">AI/ML Workshop - 200+ Minds Transformed</h3>
+                    <p class="achievement-desc">5-week intensive bootcamp that turned beginners into ML wizards. The most attended tech workshop in NITJ history!</p>
+                </div>
+            </div>
+            
+            <div class="achievement-card">
+                <div class="achievement-content">
+                    <div class="achievement-year">2023 💎</div>
+                    <h3 class="achievement-title">AlgoTrade Bot - 15% Market Beat</h3>
+                    <p class="achievement-desc">Built an automated trading system that outperformed professional fund managers. Wall Street noticed.</p>
+                </div>
+            </div>
+            
+            <div class="achievement-card">
+                <div class="achievement-content">
+                    <div class="achievement-year">2023 🚀</div>
+                    <h3 class="achievement-title">SQC Birth - The Beginning of Supremacy</h3>
+                    <p class="achievement-desc">Founded by visionaries who dared to dream big. From zero to the most elite quant club in North India.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Cursor trail with increased smoothness
+        let trails = [];
+        
+        document.addEventListener('mousemove', (e) => {
+            // Create trail more frequently for smoother effect
+            if(Math.random() > 0.5) {
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.style.left = e.clientX + 'px';
+                trail.style.top = e.clientY + 'px';
+                document.body.appendChild(trail);
+                setTimeout(() => trail.remove(), 600);
+            }
+        });
+
+        // Easter Egg
+        const easterEgg = document.querySelector('.easter-egg');
+        let easterClicks = 0;
+        
+        easterEgg.addEventListener('click', () => {
+            easterClicks++;
+            if(easterClicks === 5) {
+                alert('🎉 SUPREMACY UNLOCKED! You are now an SQC legend! 🎉');
+                easterEgg.style.background = 'linear-gradient(45deg, #f59e0b, #ef4444)';
+                confetti();
+            }
+        });
+
+        function confetti() {
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '0';
+                    confetti.style.width = '10px';
+                    confetti.style.height = '10px';
+                    confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    confetti.style.zIndex = '10000';
+                    confetti.style.animation = 'fall 3s linear';
+                    document.body.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 50);
+            }
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to { top: 100%; transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Modal Functions
+        function openModal() {
+            document.getElementById('registerModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('registerModal').classList.remove('active');
+        }
+
+        // Form Submission - Send to Google Forms
+        document.getElementById('registrationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const rollno = document.getElementById('rollno').value;
+            const branch = document.getElementById('branch').value;
+            const year = document.getElementById('year').value;
+            const interest = document.getElementById('interest').value;
+            
+            // Google Form URL - REPLACE WITH YOUR ACTUAL GOOGLE FORM URL
+            // To get this URL:
+            // 1. Create a Google Form with fields matching the ones above
+            // 2. Click "Send" → Get the prefilled link
+            // 3. Fill in dummy data and click "Get link"
+            // 4. Copy the URL and replace the entry IDs below with your form's entry IDs
+            
+            const formUrl = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
+            
+            // Create form data with entry IDs from your Google Form
+            const formData = new FormData();
+            formData.append('entry.XXXXXX', name);        // Replace XXXXXX with your form's name field entry ID
+            formData.append('entry.XXXXXX', email);       // Replace with email field entry ID
+            formData.append('entry.XXXXXX', rollno);      // Replace with roll number field entry ID
+            formData.append('entry.XXXXXX', branch);      // Replace with branch field entry ID
+            formData.append('entry.XXXXXX', year);        // Replace with year field entry ID
+            formData.append('entry.XXXXXX', interest);    // Replace with interest field entry ID
+            
+            // Submit to Google Forms
+            fetch(formUrl, {
+                method: 'POST',
+                body: formData,
+                mode: 'no-cors'
+            }).then(() => {
+                alert('🎉 WELCOME TO SQC SUPREMACY! Check your email for next steps. 🚀');
+                closeModal();
+                confetti();
+                document.getElementById('registrationForm').reset();
+            }).catch((error) => {
+                console.error('Error:', error);
+                alert('Registration submitted! Welcome to SQC!');
+                closeModal();
+                confetti();
+                document.getElementById('registrationForm').reset();
+            });
+        });
+
+        // Smooth Scroll
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const id = link.getAttribute('href').substring(1);
+                scrollToSection(id);
+            });
+        });
+
+        // Intersection Observer
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
